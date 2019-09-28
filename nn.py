@@ -116,6 +116,7 @@ def train():
         print(f'Test Loss: {eval_loss/len(test_loader):.6f}, Acc: {eval_accuracy/len(test_loader):.6f}\n')
     torch.save(model.state_dict(), 'model/neural_network.pth')
     print('the model saved in model/neural_network.pth')
+    print('down')
     
 if __name__=='__main__':
     print('start train....')
