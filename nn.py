@@ -65,7 +65,7 @@ def train():
     optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
     train_loader, test_loader = data_prepare()
     
-    for epoch in num_epochs:
+    for epoch in range(num_epochs):
         print('*'*10)
         print('Epoch: {}'.format(epoch))
         
@@ -92,9 +92,9 @@ def train():
             optimizer.step()
             
             if i%300==0:
-                print('[{epoch+1}/{num_epochs}] Loss: {running_loss/i:.6f}, Acc: {running_acc/i:.6f}')
+                print(f'[{epoch+1}/{num_epochs}] Loss: {running_loss/(i+1):.6f}, Acc: {running_accuracy/(i+1):.6f}')
             
-        print('Finish {epoch+1} epoch, Loss: {running_loss/i:.6f}, Acc: {running_acc/i:.6f}')
+        print(f'Finish {epoch+1} epoch, Loss: {running_loss/(i+1):.6f}, Acc: {running_accuracy/(i+1):.6f}')
         
         model.eval()
         eval_loss = 0.0
@@ -112,8 +112,8 @@ def train():
                 
             eval_loss += loss.item()
             _, pred = torch.max(out, 1)
-            eval_acc += (pred == label).float().mean()
-        print('Test Loss: {eval_loss/len(test_loader):.6f}, Acc: {eval_acc/len(test_loader):.6f}\n')
+            eval_accuracy += (pred == label).float().mean()
+        print(f'Test Loss: {eval_loss/len(test_loader):.6f}, Acc: {eval_accuracy/len(test_loader):.6f}\n')
     torch.save(model.state_dict(), 'model/neural_network.pth')
     print('the model saved in model/neural_network.pth')
     
