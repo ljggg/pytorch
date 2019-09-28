@@ -118,6 +118,7 @@ def train():
     print('the model saved in model/neural_network.pth')
     print('down')
     
+    
 if __name__=='__main__':
     print('start train....')
     train()
